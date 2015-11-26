@@ -12,7 +12,7 @@ GM_addStyle("#lb { display: none; }");
 
 const clipNoScroll = () => {
   ((html) => { html.className = html.className.replace(/\bnsc\b/, ""); })
-  (document.querySelector("html"));
+  (document.documentElement);
 };
 
 const takeCite = (link) => {
