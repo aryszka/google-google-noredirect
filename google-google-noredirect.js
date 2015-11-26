@@ -16,7 +16,12 @@ const clipNoScroll = () => {
 };
 
 const takeCite = (link) => {
-  var link = link.parentNode.parentNode.querySelector("cite").innerHTML
+  var link = link.parentNode.parentNode.querySelector("cite").innerHTML;
+  if (link.indexOf("...") >= 0) {
+    return "";
+  }
+  
+  link = link
     .replace(/(<[\/]?\w+>)|(\s+)/g, "")
     .replace(/›.*/, "");
 
@@ -25,13 +30,18 @@ const takeCite = (link) => {
   }
 
   return link;
-};
+}
 
 const replaceLink = (link) => {
   try {
+    const linkCite = takeCite(link);
+    if (linkCite === "") {
+      return;
+    }
+    
     const clone = document.createElement("a");
     clone.innerHTML = "[FX] " + link.innerHTML;
-    clone.href = takeCite(link);
+    clone.href = linkCite;
     link.parentNode.replaceChild(clone, link);
   } catch (err) {
     console.log(err.toString());
