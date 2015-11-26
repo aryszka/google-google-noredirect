@@ -25,7 +25,7 @@ const takeCite = (link) => {
   }
 
   return link;
-}
+};
 
 const replaceLink = (link) => {
   try {
